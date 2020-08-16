@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  data:
+    build: data/
+    volumes:
+      - data-content:/var/lib/data/content
+  logic:
+    build: logic/
+    volumes:
+      - data-content:/var/lib/logic/content
+    depends_on:
+      - data
+volumes:
+  data-content:
