@@ -22,6 +22,16 @@ func shell(_ args: [String]) -> [String] {
 
 }
 
+FileManager.ChatBotSDK.instance = FileManager.ChatBotSDK(documentsUrl: URL(fileURLWithPath: "/var/lib/logic/content/documents"))
+if !FileManager.default.fileExists(
+    atPath: FileManager.ChatBotSDK.instance.documentsUrl.path
+) {
+    try? FileManager.default.createDirectory(
+        at: FileManager.ChatBotSDK.instance.documentsUrl,
+        withIntermediateDirectories: true,
+        attributes: nil)
+}
+
 struct Config: Decodable {
 	let telegram_bot_token: String
 }
